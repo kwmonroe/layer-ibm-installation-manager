@@ -3,6 +3,9 @@ set -ex
 
 source charms.reactive.sh
 
+# Installation Manager install path
+IM_INSTALL_PATH="/opt/IBM/InstallationManager"
+
 
 # Do the actual IBM IM install
 install_installation_manager() {
@@ -18,8 +21,8 @@ install_installation_manager() {
 remove_unaccepted_software() {
   juju-log "Removing IBM IM (if installed), as the license agreement is not accepted."
 
-  if [[ -x "/var/ibm/InstallationManager/uninstall/uninstall" ]]; then
-    /var/ibm/InstallationManager/uninstall/uninstall --launcher.ini silent-uninstall.ini
+  if [[ -x "${IM_INSTALL_PATH}/uninstall/uninstall" ]]; then
+    ${IM_INSTALL_PATH}/uninstall/uninstall --launcher.ini silent-uninstall.ini
     juju-log "IM removal complete"
   else
     juju-log "IM uninstaller was not found (or is not executable)"
