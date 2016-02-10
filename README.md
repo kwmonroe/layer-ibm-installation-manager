@@ -17,7 +17,7 @@ Then, in your charm, watch for the `im.installed` state, at which point you will
 ```bash
 IM_PATH=/opt/IBM/InstallationManager
 
-@when ‘im.installed’
+@when 'im.installed'
 install_was() {
     WAS_REPO=`config-get was_repo`
     ${IM_PATH}/tools/imutilsc saveCredential -url $WAS_REPO -userName $IBM_ID_NAME -userPassword $IBM_ID_PASS -secureStorageFile "secure.store"
