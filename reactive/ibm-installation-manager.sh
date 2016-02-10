@@ -4,6 +4,14 @@ set -ex
 source charms.reactive.sh
 
 
+# Do the actual IBM IM install
+install_installation_manager() {
+  #######################
+  # TODO: install the Installation Manager
+  #######################
+}
+
+
 # Remove IBM IM
 remove_unaccepted_software() {
   juju-log "Removing IBM IM (if installed), as the license agreement is not accepted."
@@ -14,13 +22,6 @@ remove_unaccepted_software() {
   else
     juju-log "IM uninstaller was not found (or is not executable)"
   fi
-}
-
-# Do the actual IBM IM install
-install_installation_manager() {
-  #######################
-  # TODO: install the Installation Manager
-  #######################
 }
 
 
