@@ -1,0 +1,8 @@
+options:
+  accept_ibm_im_license:
+    type: boolean
+    default: False
+    description: |
+        The IBM Installation Manager software comes with special terms and
+        conditions from IBM. The Installation Manager software can only be used
+        by accepting the license terms and conditions.
