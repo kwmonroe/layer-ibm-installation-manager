@@ -7,7 +7,9 @@ source charms.reactive.sh
 # Do the actual IBM IM install
 install_installation_manager() {
   #######################
-  # TODO: install the Installation Manager
+  # TODO: install the Installation Manager from $CHARM_DIR/files/archives/*.zip
+  # Multiple architectures can be supported by this charm, so you should
+  # include an IM installer for each arch that you want this charm to support (intel, ppc64le, etc).
   #######################
 }
 
