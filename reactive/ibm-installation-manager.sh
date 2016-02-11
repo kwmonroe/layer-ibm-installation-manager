@@ -17,19 +17,6 @@ install_installation_manager() {
 }
 
 
-# Remove IBM IM
-remove_unaccepted_software() {
-  juju-log "Removing IBM IM (if installed), as the license agreement is not accepted."
-
-  if [[ -x "${IM_INSTALL_PATH}/uninstall/uninstall" ]]; then
-    ${IM_INSTALL_PATH}/uninstall/uninstall --launcher.ini silent-uninstall.ini
-    juju-log "IM removal complete"
-  else
-    juju-log "IM uninstaller was not found (or is not executable)"
-  fi
-}
-
-
 @when_not 'im.installed'
 function install_im() {
   IM_LICENSE_ACCEPTED=`config-get accept_ibm_im_license`
@@ -53,8 +40,16 @@ function check_im_config() {
   IM_LICENSE_ACCEPTED=`config-get accept_ibm_im_license`
 
   # If we were installed and our license is no longer accepted, uninstall IM.
-  if [ ! ${IM_LICENSE_ACCEPTED} ]; then
-    remove_unaccepted_software
+  if [ $IM_LICENSE_ACCEPTED != "True" ]; then
+    juju-log "Removing IBM IM, as the license agreement is not accepted."
+
+    if [[ -x "${IM_INSTALL_PATH}/uninstall/uninstall" ]]; then
+      ${IM_INSTALL_PATH}/uninstall/uninstall --launcher.ini silent-uninstall.ini
+      juju-log "IM removal complete"
+    else
+      juju-log "IM uninstaller was not found (or is not executable)"
+    fi
+
     remove_state 'im.installed'
     return
   fi
